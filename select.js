@@ -14,6 +14,8 @@ export default class Select {
     this.optionsCustomElement = document.createElement('ul')
 
     setupCustomElement(this)
+    //hide old default dropdown element
+    element.style.display = 'none';
     //append customElement to the class element
     element.after(this.customElement)
 
@@ -49,6 +51,10 @@ function setupCustomElement(select){
   })
 
   select.customElement.append(select.optionsCustomElement)
+
+  select.customElement.addEventListener('click', () => {
+    select.optionsCustomElement.classList.toggle('show')
+  })
 }
 
   //create function that takes each option and converts it into the js object
