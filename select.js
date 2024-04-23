@@ -90,6 +90,13 @@ function setupCustomElement(select) {
   select.labelElement.addEventListener("click", () => {
     select.optionsCustomElement.classList.toggle("show");
   });
+
+
+  //when mouse is out of the dropdown list add 'blur' to loose focus (hide dropdown list)
+  select.customElement.addEventListener('blur', () => {
+    select.optionsCustomElement.classList.remove("show");
+
+  })
 }
 
 //create function that takes each option and converts it into the js object
