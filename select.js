@@ -114,18 +114,20 @@ function setupCustomElement(select) {
         //open and slose dropdown with space key
         select.optionsCustomElement.classList.toggle("show");
         break;
-      case "ArrowUp":
+      case "ArrowUp":{
         const prevOption = select.options[select.selectedOptionIndex - 1];
         if (prevOption) {
           select.selectValue(prevOption.value);
         }
         break;
-      case "ArrowDown":
+      }
+      case "ArrowDown":{
         const nextOption = select.options[select.selectedOptionIndex + 1];
         if (nextOption) {
           select.selectValue(nextOption.value);
         }
         break;
+      }
       case "Enter":
       case "Escape":
         select.optionsCustomElement.classList.remove("show");
