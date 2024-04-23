@@ -18,6 +18,11 @@ export default class Select {
     element.after(this.customElement)
 
   }
+
+  //create getter to return selected option
+  get selectedOption(){
+   return this.options.find(option => option.selected)
+  }
 }
 
 
@@ -25,9 +30,22 @@ function setupCustomElement(select){
   select.customElement.classList.add('custom-select-container')
 
   select.labelElement.classList.add('custom-select-value')
+  select.labelElement.innerText = select.selectedOption.label
   select.customElement.append(select.labelElement)
 
   select.optionsCustomElement.classList.add('custom-select-options')
+  //create new  li element inside  ul by looping each option elm
+  select.options.forEach( option => {
+    const optionElement = document.createElement('li')
+    optionElement.classList.add('custom-select-option')
+    //if option is selected add class 'selected'
+    optionElement.classList.toggle('selected', option.selected)
+    optionElement.innerText = option.label
+    optionElement.dataset.value = option.value
+    //display list of city options by appending optionElement to seleted 
+    select.optionsCustomElement.append(optionElement)
+  })
+
   select.customElement.append(select.optionsCustomElement)
 }
 
@@ -35,7 +53,7 @@ function setupCustomElement(select){
 function getFormattedOptions(optionElements){
   //first convert optionsElements into an array in order to map it
   //use spread operator
-  [...optionElements].map(optionElement => {
+  return [...optionElements].map(optionElement => {
     return{
       value: optionElement.value,
       label: optionElement.label,
