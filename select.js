@@ -111,10 +111,11 @@ function setupCustomElement(select) {
   select.customElement.addEventListener("keydown", (e) => {
     switch (e.code) {
       case "Space":
-        //open and slose dropdown with space key
+        //// Toggle the visibility of the options list with the space  key
         select.optionsCustomElement.classList.toggle("show");
         break;
       case "ArrowUp":{
+          // Select the previous option in the list
         const prevOption = select.options[select.selectedOptionIndex - 1];
         if (prevOption) {
           select.selectValue(prevOption.value);
@@ -122,6 +123,7 @@ function setupCustomElement(select) {
         break;
       }
       case "ArrowDown":{
+          // Select the next option in the list
         const nextOption = select.options[select.selectedOptionIndex + 1];
         if (nextOption) {
           select.selectValue(nextOption.value);
@@ -130,18 +132,19 @@ function setupCustomElement(select) {
       }
       case "Enter":
       case "Escape":
+        // Close the options list on Enter or Escape key press
         select.optionsCustomElement.classList.remove("show");
         break;
       default:
-        //add select box functionality to look for city when typing it
+        // Handle typing in the select box to search for a city
         clearTimeout(debounceTimeout);
-        //add keys to searchTerm
+        // Add typed keys to the search term
         searchTerm += e.key;
         debounceTimeout = setTimeout(() => {
-          //reset the search after 500ms
+          //reset the search term after 500ms
           searchTerm = "";
         }, 500);
-        //if searched keys match with keys in city option
+        //Search for the option that matches the typed keys
         const searchedOption = select.options.find((option) => {
           return option.label.toLowerCase().startsWith(searchTerm);
         });
