@@ -28,6 +28,8 @@ export default class Select {
 
 function setupCustomElement(select){
   select.customElement.classList.add('custom-select-container')
+  // enable focusability on elm when TAB key is pressed; 0 means focus on close next elm
+  select.customElement.tabIndex = 0 
 
   select.labelElement.classList.add('custom-select-value')
   select.labelElement.innerText = select.selectedOption.label
